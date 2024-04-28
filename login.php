@@ -10,7 +10,7 @@
                 Авторизация
             </div>
             <div class="card-body">
-                <form>
+                <form action="/actions/user/login.php" method="post">
                     <div class="mb-3">
                         <label for="emailField" class="form-label">E-mail</label> <input type="email" class="form-control" id="emailField" aria-describedby="emailHelp">
                         <div id="emailHelp" class="form-text">Мы никогда никому не передадим вашу электронную почту.</div>

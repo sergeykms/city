@@ -1,6 +1,9 @@
 <!doctype html>
 <html lang="ru">
 <?php require_once __DIR__ . '/components/head.php' ?>
+<?php
+require_once __DIR__ . '/database/db.php';
+?>
 <body>
 <?php require_once __DIR__ . '/components/header.php' ?>
 <section class="main">
