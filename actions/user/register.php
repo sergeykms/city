@@ -1,7 +1,4 @@
 <?php
-
-echo 'test register';
-
 $email = $_POST['email'];
 $password = $_POST['password'];
 $passwordConfirm = $_POST['passwordConfirm'];
@@ -18,7 +15,7 @@ filter_var($email, FILTER_VALIDATE_EMAIL) || $error['email'] = true;
 $passwordConfirm === $password || ($error['passwordConfirm'] = true);
 
 if (!empty($error)) {
-    header('Location: /register.php?error=true');
+    $path = '/register.php';
+    header("Location:{$path}");
 }
-
 
