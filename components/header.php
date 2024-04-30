@@ -1,5 +1,4 @@
 <?php
-session_start();
 $user = NULL;
 if (isset($_SESSION['user']['name'])) {
     $user = $_SESSION['user']['name'];
@@ -45,23 +44,23 @@ if (isset($_SESSION['user']['name'])) {
                             <ul class="dropdown-menu" aria-labelledby="accountDropdown">
                                 <?php
                                 if (!$user) {
-                                    ?>
-                                    <li>
-                                        <form action="/login.php" method="post">
-                                            <button class="dropdown-item">Вход</button>
-                                        </form>
-                                        <form action="/register.php" method="post">
-                                            <button class="dropdown-item">Регистрация</button>
-                                        </form>
-                                    <?php
-                                } else {
-                                    ?>
-                                    <form action="/actions/user/logout.php" method="post">
-                                        <button class="dropdown-item">Выход</button>
+                                ?>
+                                <li>
+                                    <form action="/login.php" method="post">
+                                        <button class="dropdown-item">Вход</button>
+                                    </form>
+                                    <form action="/register.php" method="post">
+                                        <button class="dropdown-item">Регистрация</button>
                                     </form>
                                     <?php
-                                }
-                                ?>
+                                    } else {
+                                        ?>
+                                        <form action="/actions/user/logout.php" method="post">
+                                            <button class="dropdown-item">Выход</button>
+                                        </form>
+                                        <?php
+                                    }
+                                    ?>
                             </ul>
                         </li>
                     </ul>

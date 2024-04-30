@@ -1,3 +1,12 @@
+<?php
+session_start();
+$user = NULL;
+if (isset($_SESSION['user']['name'])) {
+    $user = $_SESSION['user']['name'];
+}
+?>
+
+
 <!doctype html>
 <html lang="ru">
 <?php require_once __DIR__ . '/components/head.php' ?>
