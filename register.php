@@ -1,4 +1,9 @@
 <?php
+if ($_SERVER["REQUEST_METHOD"] != "POST") {
+    $path = "/";
+    header("Location:$path");
+}
+
 session_start();
 if (isset($_SESSION['error'])) {
     $error = $_SESSION['error'];
@@ -37,7 +42,8 @@ if (isset($_SESSION['error'])) {
                       novalidate>
                     <div class="mb-3">
                         <label for="emailRegisterField" class="form-label">E-mail</label>
-                        <input type="text" class="form-control"
+                        <input type="text"
+                               class="form-control"
                                value="<?= isset($fields['email']) ? $fields['email'] : '' ?>"
                                id="emailRegisterField"
                                aria-describedby="emailHelp"
@@ -53,7 +59,8 @@ if (isset($_SESSION['error'])) {
                     </div>
                     <div class="mb-3">
                         <label for="fullNameField" class="form-label">ФИО</label>
-                        <input type="text" class="form-control"
+                        <input type="text"
+                               class="form-control"
                                value="<?= isset($fields['name']) ? $fields['name'] : '' ?>"
                                id="fullNameField"
                                aria-describedby="emailHelp"
@@ -69,7 +76,8 @@ if (isset($_SESSION['error'])) {
 
                     <div class="mb-3">
                         <label for="dobField" class="form-label">Дата рождения</label>
-                        <input type="date" class="form-control"
+                        <input type="date"
+                               class="form-control"
                                value="<?= isset($fields['birthday']) ? $fields['birthday'] : '' ?>"
                                id="dobField"
                                aria-describedby="emailHelp"
@@ -93,9 +101,7 @@ if (isset($_SESSION['error'])) {
                         if (!isset($fields['password']) && $error) {
                             ?>
                             <p class="small" style=" color: crimson">Пароль должен быть не менее 6 символов и содержать
-                                одну
-                                цифру и латинские буквы в верхнем и
-                                нижнем регистре</p>
+                                одну цифру и латинские буквы в верхнем и нижнем регистре</p>
                             <?php
                         }
                         ?>

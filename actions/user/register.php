@@ -21,6 +21,7 @@ if (filter_var($email, FILTER_VALIDATE_EMAIL)) {
 } else {
     $error = "Ошибка введенных данных";
 }
+
 if (preg_match("/^(?=.*[A-zА-я])[A-zА-я ]+$/", $name) && !empty($name)) {
     $verifiedFields['name'] = $name;
 } else {
@@ -61,6 +62,8 @@ if ($error) {
             'birth_date' => $birthday,
             'group_id' => $config['defaultUserGroup']
         ]);
+        unset($_SESSION['fields']);
+        unset($_SESSION['error']);
         $path = '/login.php';
         header("Location:$path");
     } catch (PDOException $exception) {
