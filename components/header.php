@@ -1,8 +1,9 @@
 <?php
 $user = NULL;
-if (isset($_SESSION['user']['name'])) {
-    $user = $_SESSION['user']['name'];
+if (isset($_COOKIE['userName'])) {
+    $user = $_COOKIE['userName'];
 }
+
 ?>
 
 <header class="header">
@@ -16,23 +17,30 @@ if (isset($_SESSION['user']['name'])) {
             </button>
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                    <li class="nav-item">
-                        <a class="nav-link" href="/">Заявки</a>
-                    </li>
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
-                           data-bs-toggle="dropdown" aria-expanded="false">
-                            Мои заявки
-                        </a>
-                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <li><a class="dropdown-item" href="/add-ticket.php">Добавить</a></li>
-                            <li><a class="dropdown-item" href="/my-tickets.php">Мои заявки <span
-                                            class="badge bg-secondary">4</span></a></li>
-                        </ul>
-                    </li>
-                    <li class="nav-item">
-                        <a href="/tickets-control.php" class="nav-link">Управление заявками</a>
-                    </li>
+                    <?php
+                    if ($user) {
+                        ?>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/">Заявки</a>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                               data-bs-toggle="dropdown" aria-expanded="false">
+                                Мои заявки
+                            </a>
+                            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <li><a class="dropdown-item" href="/add-ticket.php">Добавить</a></li>
+                                <li><a class="dropdown-item" href="/my-tickets.php">Мои заявки <span
+                                                class="badge bg-secondary">4</span></a></li>
+                            </ul>
+                        </li>
+                        <li class="nav-item">
+                            <a href="/tickets-control.php" class="nav-link">Управление заявками</a>
+                        </li>
+
+                        <?php
+                    }
+                    ?>
                 </ul>
                 <div class="right-side d-flex">
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0">

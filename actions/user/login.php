@@ -39,12 +39,13 @@ if ($error) {
         if (!empty($users) && password_verify($password, $users['password'])) {
             unset($_SESSION['fields']);
             unset($_SESSION['error']);
-            $_SESSION['auth'] = true;
-            echo "Успешно";
         } else {
             $_SESSION['fields'] = $verifiedFields;
             $_SESSION['error'] = "Ошибка ввода логина или пароля. Попробуйте еще раз";
             $_SESSION['user'] = $currentUser;
+            setcookie('userName', $currentUser['name'], time() + (86400 * 30), "/");
+            setcookie('userEmail', $currentUser['email'], time() + (86400 * 30), "/");
+            session_destroy();
             $path = '/';
             header("Location:$path");
         }
