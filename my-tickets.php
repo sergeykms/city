@@ -1,3 +1,22 @@
+<?php
+
+global $db;
+session_start();
+
+require_once __DIR__ . "/database/db.php";
+
+$query = $db->prepare("SELECT * FROM tikets JOIN status ON tikets.status_id = status.id WHERE tikets.user_id = :user_id");
+try {
+    $query->execute([
+        'user_id' => $_COOKIE['userId'],
+    ]);
+    $userTickets = $query->fetchAll(PDO::FETCH_ASSOC);
+} catch (PDOException $exception) {
+    echo $exception->getMessage();
+}
+
+?>
+
 <!doctype html>
 <html lang="ru">
 <?php require_once __DIR__ . '/components/head.php' ?>
@@ -20,66 +39,9 @@
                 </tr>
                 </thead>
                 <tbody>
-                <tr>
-                    <td>
-                        <img src="src/static/image-1.jpg" width="200" alt="">
-                    </td>
-                    <td>Убрать мусор</td>
-                    <td>В нашем районе стали складировать много мусора, никто не убирает..</td>
-                    <td>
-                        <span class="badge rounded-pill bg-success">Выполнено</span>
-                    </td>
-                    <td>
-                        <div class="dropdown">
-                            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-                                Действия
-                            </button>
-                            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                                <li><a class="dropdown-item" href="#">Удалить</a></li>
-                            </ul>
-                        </div>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <img src="src/static/image-2.jpg" width="200" alt="">
-                    </td>
-                    <td>Отремонтировать асфальт</td>
-                    <td>Возле дороги на улице Ейдемана рядом с Политическим колледжем образовалась опасная яма.</td>
-                    <td>
-                        <span class="badge rounded-pill bg-warning">В процессе</span>
-                    </td>
-                    <td>
-                        <div class="dropdown">
-                            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-                                Действия
-                            </button>
-                            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                                <li><a class="dropdown-item" href="#">Удалить</a></li>
-                            </ul>
-                        </div>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <img src="src/static/image-3.jpg" width="200" alt="">
-                    </td>
-                    <td>Замело снегом</td>
-                    <td>Весь двор в ЖК Пушкинский замело снегом, выезд и въезд затруднены</td>
-                    <td>
-                        <span class="badge rounded-pill bg-info">Создано</span>
-                    </td>
-                    <td>
-                        <div class="dropdown">
-                            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-                                Действия
-                            </button>
-                            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                                <li><a class="dropdown-item" href="#">Удалить</a></li>
-                            </ul>
-                        </div>
-                    </td>
-                </tr>
+                <?php
+                require_once __DIR__ . '/templates/ticketCard.php';
+                ?>
                 </tbody>
             </table>
         </div>

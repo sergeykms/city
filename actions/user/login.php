@@ -45,6 +45,7 @@ if ($error) {
             $_SESSION['user'] = $currentUser;
             setcookie('userName', $currentUser['name'], time() + (86400 * 30), "/");
             setcookie('userEmail', $currentUser['email'], time() + (86400 * 30), "/");
+            setcookie('userId', $currentUser['id'], time() + (86400 * 30), "/");
             session_destroy();
             $path = '/';
             header("Location:$path");

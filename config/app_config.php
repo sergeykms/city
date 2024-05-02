@@ -1,5 +1,6 @@
 <?php
 
 return [
-   'defaultUserGroup' => 2,
+    'defaultUserGroup' => 2,
+    'defaultTicketStatus' => 3,
 ];
